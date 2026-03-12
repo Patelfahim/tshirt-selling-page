@@ -3,195 +3,366 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purse Collection</title>
+  <title>T-Shirt Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FDF0D5;
+      --brown: #61210F;
+      --brown-dark: #4a1a0c;
+      --brown-light: #8a3520;
+      --card-bg: #fff;
+      --text-dark: #2b1a10;
+      --text-muted: #7a6055;
+    }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color:#FDF0D5;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
     }
-    a{
-      color: #fff;
-    }
+
+    /* ── HEADER ── */
     header {
-      background-color: #61210F;
+      background-color: var(--brown);
       color: #fff;
-      padding: 1rem 2rem;
-      text-align: center;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(97,33,15,0.3);
     }
 
     header h1 {
-    color:#FDF0D5;
-      margin: 0;
-      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: var(--cream);
+      letter-spacing: 0.02em;
     }
 
+    .header-badge {
+      background: var(--cream);
+      color: var(--brown);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO STRIP ── */
+    .hero-strip {
+      background: linear-gradient(135deg, var(--brown-light) 0%, var(--brown) 100%);
+      color: var(--cream);
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-strip p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      opacity: 0.9;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── GRID ── */
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 1.5rem;
+      padding: clamp(1rem, 4vw, 2.5rem);
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
+    /* ── CARD ── */
     .card {
-      background: #fff;
-      border-radius: 10px;
+      background: var(--card-bg);
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(97,33,15,0.1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
     }
+
     .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(97,33,15,0.18);
+    }
+
+    .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #f5e8d8;
     }
 
     .card img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.06);
     }
 
     .card-content {
-      padding: 1rem;
+      padding: 1rem 1.1rem 1.2rem;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .card-content h3 {
-      margin: 0.5rem 0;
-      font-size: 1.5rem;
-      color: #343a40;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-dark);
+      line-height: 1.3;
     }
 
-    .card-content p {
-      color: #6c757d;
-      font-size: 1rem;
-      margin-bottom: 1rem;
+    .card-content .price {
+      color: var(--brown);
+      font-size: 1.05rem;
+      font-weight: 600;
     }
 
     .card-content button {
-      background-color: #343a40;
+      background-color: var(--brown);
       color: white;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+      width: 100%;
     }
 
     .card-content button:hover {
-      background-color: #495057;
+      background-color: var(--brown-dark);
+      transform: scale(1.02);
     }
 
+    .card-content button a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* ── FOOTER ── */
     footer {
-      background-color: #61210F;
+      background-color: var(--brown);
       color: #fff;
       text-align: center;
-      padding: 1rem 2rem;
+      padding: 1.8rem 1.5rem;
       margin-top: 2rem;
     }
 
-    footer a{
-      color: #fff;
+    footer p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.2rem;
+    }
+
+    .footer-links a {
+      color: var(--cream);
       text-decoration: none;
-      margin: 0 10px;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover { opacity: 1; }
+
+    /* ── RESPONSIVE BREAKPOINTS ── */
+    @media (max-width: 600px) {
+      header { padding: 1rem; }
+
+      .container {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .card-content h3 { font-size: 0.9rem; }
+      .card-content .price { font-size: 0.9rem; }
+      .card-content button { font-size: 0.8rem; padding: 0.5rem; }
+      .card-content { padding: 0.75rem 0.75rem 0.9rem; gap: 0.3rem; }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .container {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>T-Shirt Collection</h1>
+    <span class="header-badge">New Arrivals</span>
   </header>
 
+  <div class="hero-strip">
+    <p>Explore our curated collection of premium tees — from relaxed fits to bold prints.</p>
+  </div>
+
   <div class="container">
+
     <div class="card">
-      <img src="https://image.hm.com/assets/hm/24/d8/24d8e9448659fffe5f5eb223b6e48cde991bf054.jpg?imwidth=786" alt="Polo Shirt">
+      <div class="card-img-wrap">
+        <img src="https://image.hm.com/assets/hm/24/d8/24d8e9448659fffe5f5eb223b6e48cde991bf054.jpg?imwidth=786" alt="Polo Shirt" loading="lazy">
+      </div>
       <div class="card-content">
         <h3>Polo Shirt</h3>
-        <p>$120.00</p>
-        <button><a href="https://www2.hm.com/en_asia1/productpage.1276602007.html">Shop Now</a></button>
+        <p class="price">$120.00</p>
+        <button><a href="https://www2.hm.com/en_asia1/productpage.1276602007.html" target="_blank" rel="noopener">Shop Now</a></button>
       </div>
     </div>
+
     <div class="card">
-        <img src="T-2.jpg" alt="STRIPED T-SHIRT">
-        <div class="card-content">
-          <h3>STRIPED T-SHIRT</h3>
-          <p>$150.00</p>
-          <button><a href="https://www.zara.com/in/en/striped-t-shirt-p00722685.html?v1=502936475&v2=242665">Shop Now</a></button>
-        </div>    
-  </div>
-    <div class="card">
-      <img src="T-3.avif" alt="Loose Fit Jersey top - Blue/Striped">
+      <div class="card-img-wrap">
+        <img src="https://static.zara.net/assets/public/852f/eb22/7f874428ad98/c97d55a6d37f/00722685400-e1/00722685400-e1.jpg?ts=1763999633477" alt="Striped T-Shirt" loading="lazy">
+      </div>
       <div class="card-content">
-        <h3>Loose Fit Jersey top - Blue/Striped</h3>
-        <p>$80.00</p>
-        <button><a href="https://www2.hm.com/en_in/productpage.1021953015.html?srsltid=AfmBOookSvKoZhQFZqj8Mf4iNYuYESRYjQfSKjxXFoXFyrRyVQlsIEOR">Shop Now</a></button>
+        <h3>Striped T-Shirt</h3>
+        <p class="price">$150.00</p>
+        <button><a href="https://www.zara.com/in/en/striped-t-shirt-p00722685.html" target="_blank" rel="noopener">Shop Now</a></button>
       </div>
     </div>
 
     <div class="card">
-      <img src="T-4.avif" alt="Dark Brown Stripped T-Shirt">
+      <div class="card-img-wrap">
+        <img src="https://www2.hm.com/en_in/productpage.1021953015.html" alt="Loose Fit Jersey Top" loading="lazy">
+      </div>
       <div class="card-content">
-        <h3>Dark Brown Stripped T-Shirt</h3>
-        <p>$150.00</p>
-        <button ><a href="https://www2.hm.com/en_in/productpage.1328819002.html">Shop Now</a></button>
+        <h3>Loose Fit Jersey Top — Blue/Striped</h3>
+        <p class="price">$80.00</p>
+        <button><a href="https://www2.hm.com/en_in/productpage.1021953015.html" target="_blank" rel="noopener">Shop Now</a></button>
       </div>
     </div>
-    <div class="card">
-        <img src="T-5.webp" alt="Pure Cotton Oversized Fit Printed Mesh T-shirt">
-        <div class="card-content">
-          <h3>Pure Cotton Oversized Fit Printed Mesh T-shirt</h3>
-          <p>$100.00</p>
-          <button><a href="https://www.myntra.com/tshirts/h&m/hm-men-pure-cotton-oversized-fit-printed-mesh-t-shirt/28991760/buy?utm_source=admitad&utm_medium=affiliate&utm_campaign=608871_e1bb6a449faa59a3aeb2c2327ef6b66a&admitad_uid=e1bb6a449faa59a3aeb2c2327ef6b66a&tagtag_uid=e1bb6a449faa59a3aeb2c2327ef6b66a">Shop Now</a></button>
-        </div>
-      </div>
 
     <div class="card">
-        <img src="T-6.avif" alt=" White Oversized Fit Cotton T-shirt">
-        <div class="card-content">
-          <h3> White Oversized Fit Cotton T-shirt</h3>
-          <p>$80.00</p>
-          <button><a href="https://www2.hm.com/en_in/productpage.1035207030.html?srsltid=AfmBOor9uFtHLYlK9YaBV0CIvVm0U_xAbWbTcoDye3zPxFJYXYit6lJJ">Shop Now</a></button>
-        </div>
+      <div class="card-img-wrap">
+        <img src="T-4.jpg" alt="Dark Brown Striped T-Shirt" loading="lazy">
       </div>
-      
-      <div class="card">
-        <img src="T-7.avif" alt="Loose Fit Printed T-shirt">
-        <div class="card-content">
-          <h3>Loose Fit Printed T-shirt</h3>
-          <p>$80.00</p>
-          <button><a href="https://www2.hm.com/en_in/productpage.1222925004.html?srsltid=AfmBOoqpVnWmviNubIQuUe1Cpsafk264jaZXSrIGcyWGS1x1WVs5DeaG">Shop Now</a></button>
-        </div>
+      <div class="card-content">
+        <h3>Dark Brown Striped T-Shirt</h3>
+        <p class="price">$150.00</p>
+        <button><a href="https://www2.hm.com/en_in/productpage.1328819002.html" target="_blank" rel="noopener">Shop Now</a></button>
       </div>
-      <div class="card">
-        <img src="T-8.webp" alt="Purse 3">
-        <div class="card-content">
-          <h3>Black Oversized T-Shirt</h3>
-          <p>$100.00</p>
-          <button><a href="https://www.posudaeuro-market.ru/?h=17669994051550">Shop Now</a></button>
-        </div>
-      </div>
+    </div>
 
-      <div class="card">
-        <img src="T-9.avif" alt="Purse 3">
-        <div class="card-content">
-          <h3>Long-Sleeve T-Shirt</h3>
-          <p>$120.00</p>
-          <button><a href="https://www2.hm.com/en_in/men/shop-by-product/tshirts-tank-tops/long-sleeves.html?srsltid=AfmBOopxDKnz66PUw87cDELDnoJgPr9wtgXdnICRSC5ItG0StDq-d3Eu">Shop Now</a></button>
-        </div>
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="T-5.webp" alt="Pure Cotton Oversized Fit Printed Mesh T-shirt" loading="lazy">
       </div>
-      <div class="card">
-        <img src="T-10.jpg" alt="Purse 3">
-        <div class="card-content">
-          <h3>Textured-knit polo shirt</h3>
-          <p>$200.00</p>
-          <button><a href="https://www2.hm.com/en_in/productpage.1284111004.html?crawl&utm_source=google&utm_medium=cpc&utm_campaign=mk_in|ln_eng|pl_google|ct_fm|bu_kids|kt_gen|bg_performance|cs_fmax|adt_all|sp_med|pi_ing06anu3aa214&utm_term=&gad_source=1&gad_campaignid=21630186444&gbraid=0AAAAADvrmzQ7dNBkvd74O5x8cWCxu1KAu&gclid=Cj0KCQjwwsrFBhD6ARIsAPnUFD23CyHUTu-4F837EEWOklXhXeT2EOpTFQ3aYeJcc667ZEHKW8iVFokaAiazEALw_wcB">Shop Now</a></button>
-        </div>
+      <div class="card-content">
+        <h3>Cotton Oversized Printed Mesh T-Shirt</h3>
+        <p class="price">$100.00</p>
+        <button><a href="https://www.myntra.com/tshirts/h&m/hm-men-pure-cotton-oversized-fit-printed-mesh-t-shirt/28991760/buy" target="_blank" rel="noopener">Shop Now</a></button>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="T-6.jpg" alt="White Oversized Fit Cotton T-shirt" loading="lazy">
+      </div>
+      <div class="card-content">
+        <h3>White Oversized Cotton T-Shirt</h3>
+        <p class="price">$80.00</p>
+        <button><a href="https://www2.hm.com/en_in/productpage.1035207030.html" target="_blank" rel="noopener">Shop Now</a></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="T-7.jpg" alt="Loose Fit Printed T-shirt" loading="lazy">
+      </div>
+      <div class="card-content">
+        <h3>Loose Fit Printed T-Shirt</h3>
+        <p class="price">$80.00</p>
+        <button><a href="https://www2.hm.com/en_in/productpage.1222925004.html" target="_blank" rel="noopener">Shop Now</a></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="T-8.webp" alt="Black Oversized T-Shirt" loading="lazy">
+      </div>
+      <div class="card-content">
+        <h3>Black Oversized T-Shirt</h3>
+        <p class="price">$100.00</p>
+        <button><a href="https://www.posudaeuro-market.ru/?h=17669994051550" target="_blank" rel="noopener">Shop Now</a></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="T-9.avif" alt="Long-Sleeve T-Shirt" loading="lazy">
+      </div>
+      <div class="card-content">
+        <h3>Long-Sleeve T-Shirt</h3>
+        <p class="price">$120.00</p>
+        <button><a href="https://www2.hm.com/en_in/men/shop-by-product/tshirts-tank-tops/long-sleeves.html" target="_blank" rel="noopener">Shop Now</a></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="T-10.jpg" alt="Textured-knit Polo Shirt" loading="lazy">
+      </div>
+      <div class="card-content">
+        <h3>Textured-Knit Polo Shirt</h3>
+        <p class="price">$200.00</p>
+        <button><a href="https://www2.hm.com/en_in/productpage.1284111004.html" target="_blank" rel="noopener">Shop Now</a></button>
+      </div>
+    </div>
+
   </div>
+
   <footer>
-    <p>&copy; 2025 T-Shirt Collection. All rights reserved.</p><br>
-    <a href="#">Privacy Policy</a>|
-    <a href="#">Terms of Service</a>|
-    <a href="mailto:patelfahim120@gmail.com">Contact Us</a>
+    <p>&copy; 2025 T-Shirt Collection. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
   </footer>
+
 </body>
 </html>
